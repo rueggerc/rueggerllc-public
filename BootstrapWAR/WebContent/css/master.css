@@ -1,0 +1,61 @@
+.zebrastripe
+{
+	background-color: #DDEEFF;
+}
+
+span.spanMatchText
+{
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+span.spanNormalElement
+{
+	background: #C0C0CO;	
+}
+
+span.spanSelectedElement
+{
+	background: #000040;
+	color: white;
+	cursor: pointer;
+}
+
+.inputField
+{
+	font-style: regular;
+	font-family: Arial;
+	color: black;
+	font-size: 10pt
+}
+
+.fieldName
+{
+	font-style: regular;
+	font-family: Arial;
+	font-weight: bold;
+	color: black;
+	font-size: 10pt
+}
+
+.listHeader
+{
+	font-style: regular;
+	background-color: lightgrey;
+	font-family: Arial;
+	font-size: 10pt
+}
+
+.listItem
+{
+	font-style: regular;
+	font-family: Arial;
+	font-size: 8pt
+}
+
+.tooltipItem
+{
+	font-style: regular;
+	font-family: Arial;
+	font-size: 8pt	
+}
