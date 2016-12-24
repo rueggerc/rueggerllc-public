@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<project name="RestWeb" default="all" basedir=".">
+
+<property name="appName"       	value="RestWeb"/>
+<property name="srcdir"       	value="${basedir}/src"/>
+<property name="libdir"       	value="${basedir}/WebContent/WEB-INF/lib"/>
+<property name="targetdir"   	value="${basedir}/build"/>
+<property name="distdir"      	value="${basedir}/dist"/>
+<property name="warfile"      	value="${distdir}/${appName}.war"/>
+<property name="javac.source"	value="1.7"/>
+<property name="TOMCAT.HOME"    value="C:/apache-tomcat-8.0.36"/>
+<property name="deploydir"      value="${TOMCAT.HOME}/webapps"/>
+			
+<path id="classpath.dev">
+  <fileset dir="${libdir}/">
+    <include name="*.jar"/>
+  </fileset>
+  <fileset dir="${TOMCAT.HOME}/lib">
+    <include name="*.jar"/>
+  </fileset>
+</path>
+
+<target name="all" depends="clean, compile, buildWar, deploy">
+</target>
+
+<target name="deploy">
+  <copy file="${warfile}" toDir="${deploydir}"/>
+  <echo message="Deploy Complete"/>
+</target>
+
+
+<target name="init">
+	<mkdir dir="${targetdir}" />
+	<mkdir dir="${distdir}" />
+</target>
+	
+	
+<target name="compile" depends="init">
+  <echo message="Compiling..."/>
+  <javac 
+    debug="true"
+    deprecation="false"
+    verbose="false"
+    listfiles="false"
+    source="${javac.source}"
+    srcdir="${srcdir}"
+    destdir="${targetdir}">
+    <classpath refid="classpath.dev"/>
+  </javac>
+</target>
+
+
+<target name="buildWar" depends="compile">
+
+	<war warfile="${warfile}" webxml="WebContent/WEB-INF/web.xml">
+		<fileset dir="WebContent"   includes="**/*" excludes="**/web.xml"/>
+		<classes dir="${targetdir}" includes="**/*.class"/>
+		<classes dir="${srcdir}"    includes="**/*.properties,**/*.xml"/>
+	</war>
+
+</target>
+	
+
+<target name="clean">
+	<delete dir="${targetdir}"/>
+	<delete dir="${distdir}"/>
+</target>
+
+
+
+</project>
