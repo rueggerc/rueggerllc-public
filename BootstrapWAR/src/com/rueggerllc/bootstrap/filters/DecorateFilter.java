@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 
+/*
+ * Modify the response with header and body section
+ */
 public class DecorateFilter implements Filter {
 	
 	private static final Logger logger = Logger.getLogger(DecorateFilter.class);
