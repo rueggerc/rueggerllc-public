@@ -1,0 +1,31 @@
+apply plugin: 'war'
+apply plugin: 'eclipse'
+
+repositories {
+  jcenter();
+}
+
+dependencies {
+  providedCompile 'javax.servlet:servlet-api:2.5'
+  compile 'log4j:log4j:1.2.17'
+}
+
+ext {
+  tomcatHome = '/users/Chris/tools/apache-tomcat-8.0.38'
+  ruegger = 'christopher'
+}
+
+task showCache << {
+  configurations.compile.each { print it }
+}
+
+task deployWar << {
+  println tomcatHome
+  println ruegger
+  println buildDir
+  copy {
+    from "${buildDir}/libs"
+    into "${tomcatHome}/webapps"
+    include '*.war'
+  }
+}
