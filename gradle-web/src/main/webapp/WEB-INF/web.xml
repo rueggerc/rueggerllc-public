@@ -17,7 +17,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
 
   <servlet-mapping>
     <servlet-name>HelloServlet</servlet-name>
-    <url-pattern>/</url-pattern>
+    <url-pattern>/HelloServlet</url-pattern>
   </servlet-mapping>
  
 </web-app>
