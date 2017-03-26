@@ -16,7 +16,7 @@ ext {
 }
 
 task showCache << {
-  configurations.compile.each { print it }
+  configurations.compile.each { println it }
 }
 
 task deployWar << {
