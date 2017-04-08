@@ -35,6 +35,7 @@ public class DownloadServlet extends javax.servlet.http.HttpServlet {
 			
 			response.setContentType("image/jpeg");
 			response.setContentLength((int)size);
+			response.setHeader("Content-Disposition", "attachment; filename=\"" + name + "\"");
 			byte[] data = Files.readAllBytes(source);
 			
 			// Write file to output
