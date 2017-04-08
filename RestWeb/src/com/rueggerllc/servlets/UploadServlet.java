@@ -16,6 +16,8 @@ import javax.servlet.http.Part;
 
 import org.apache.log4j.Logger;
 
+import com.rueggerllc.util.Constants;
+
 @WebServlet("/uploadServlet")
 @MultipartConfig
 public class UploadServlet extends javax.servlet.http.HttpServlet {
@@ -42,7 +44,7 @@ public class UploadServlet extends javax.servlet.http.HttpServlet {
 		    logger.info("File size =" + fileSize);
 		    
 		    InputStream inputStream = filePart.getInputStream();
-		    final Path destination = Paths.get("/Users/chris/data/uploads/" + fileName);
+		    final Path destination = Paths.get(Constants.IMAGES_DIR + fileName);
 		    Files.copy(inputStream, destination, StandardCopyOption.REPLACE_EXISTING);
 		    inputStream.close();
 		    
