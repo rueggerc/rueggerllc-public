@@ -86,6 +86,9 @@
 		<fileset dir="WebContent"   includes="**/*" excludes="**/web.xml"/>
 		<classes dir="${targetdir}" includes="**/*.class"/>
 		<classes dir="${srcdir}"    includes="**/*.properties,**/*.xml"/>
+                <lib dir="${distdir}">
+			<include name="restlib.jar"/>
+                </lib>
 	</war>
 </target>
 	
