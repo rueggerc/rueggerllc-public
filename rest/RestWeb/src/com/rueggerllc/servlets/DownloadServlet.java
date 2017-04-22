@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.rueggerllc.util.Constants;
+import com.rueggerllc.util.Utils;
 
 @WebServlet("/downloadServlet")
 public class DownloadServlet extends javax.servlet.http.HttpServlet {
@@ -30,7 +30,7 @@ public class DownloadServlet extends javax.servlet.http.HttpServlet {
 			String name = request.getParameter("name");
 			logger.info("Download File=" + name);
 			
-			final Path source = Paths.get(Constants.IMAGES_DIR + name);
+			final Path source = Paths.get(Utils.getImagesDirectory() + name);
 			long size = Files.size(source);
 			
 			response.setContentType("image/jpeg");
