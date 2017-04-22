@@ -6,7 +6,7 @@
 <property name="restlib.srcdir"	  	value="../RestLib/src"/>
 <property name="restlib.libdir"	  	value="../RestLib/lib"/>
 <property name="distdir"      		value="${basedir}/dist"/>
-<property name="jarfile"	  	value="${distdir}/restlib.jar"/>
+<property name="jarfile"		  	value="${distdir}/restlib.jar"/>
 <property name="libdir"      	 	value="${basedir}/WebContent/WEB-INF/lib"/>
 <property name="targetdir"   		value="${basedir}/build"/>
 <property name="warfile"      		value="${distdir}/${appName}.war"/>
