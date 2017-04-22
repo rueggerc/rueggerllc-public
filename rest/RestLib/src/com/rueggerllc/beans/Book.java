@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+// Book Class
 @XmlAccessorType(value = XmlAccessType.NONE)
 @XmlRootElement(name = "book", namespace = "http://rest.rueggerllc.com")
 public class Book extends DomainTransferObject {

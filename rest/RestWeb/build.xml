@@ -1,18 +1,24 @@
 <?xml version="1.0"?>
 <project name="RestWeb" default="all" basedir=".">
 
-<property name="appName"       	value="RestWeb"/>
-<property name="srcdir"       	value="${basedir}/src"/>
-<property name="libdir"       	value="${basedir}/WebContent/WEB-INF/lib"/>
-<property name="targetdir"   	value="${basedir}/build"/>
-<property name="distdir"      	value="${basedir}/dist"/>
-<property name="warfile"      	value="${distdir}/${appName}.war"/>
-<property name="javac.source"	value="1.7"/>
-<property name="TOMCAT.HOME"    value="C:/apache-tomcat-8.0.36"/>
-<property name="deploydir"      value="${TOMCAT.HOME}/webapps"/>
+<property name="appName"       		value="RestWeb"/>
+<property name="srcdir"       		value="${basedir}/src"/>
+<property name="restlib.srcdir"	  	value="../RestLib/src"/>
+<property name="restlib.libdir"	  	value="../RestLib/lib"/>
+<property name="distdir"      		value="${basedir}/dist"/>
+<property name="jarfile"	  	value="${distdir}/restlib.jar"/>
+<property name="libdir"      	 	value="${basedir}/WebContent/WEB-INF/lib"/>
+<property name="targetdir"   		value="${basedir}/build"/>
+<property name="warfile"      		value="${distdir}/${appName}.war"/>
+<property name="javac.source"		value="1.7"/>
+<property name="TOMCAT.HOME"   	 	value="/Users/chris/tools/apache-tomcat-8.0.38"/>
+<property name="deploydir"      	value="${TOMCAT.HOME}/webapps"/>
 			
-<path id="classpath.dev">
+<path id="classpath.war">
   <fileset dir="${libdir}/">
+    <include name="*.jar"/>
+  </fileset>
+  <fileset dir="${distdir}/">
     <include name="*.jar"/>
   </fileset>
   <fileset dir="${TOMCAT.HOME}/lib">
@@ -20,7 +26,13 @@
   </fileset>
 </path>
 
-<target name="all" depends="clean, compile, buildWar, deploy">
+<path id="classpath.jar">
+  <fileset dir="${restlib.libdir}/">
+    <include name="*.jar"/>
+  </fileset>
+</path>
+
+<target name="all" depends="clean, buildJar, compileWar, buildWar, deploy">
 </target>
 
 <target name="deploy">
@@ -28,15 +40,34 @@
   <echo message="Deploy Complete"/>
 </target>
 
-
-<target name="init">
-	<mkdir dir="${targetdir}" />
-	<mkdir dir="${distdir}" />
+	
+<target name="buildJar" depends="compileJar">
+  <jar jarfile="${jarfile}">
+    <fileset dir="${targetdir}"/>
+    <fileset dir="${restlib.srcdir}">
+      <include name="**/*.xml"/>
+      <include name="**/*.properties"/>
+    </fileset>
+  </jar>
 </target>
 	
 	
-<target name="compile" depends="init">
-  <echo message="Compiling..."/>
+<target name="compileJar" depends="init">
+  <echo message="Compiling Jar..."/>
+  <javac 
+    debug="true"
+    deprecation="false"
+    verbose="false"
+    listfiles="false"
+    source="${javac.source}"
+    srcdir="${restlib.srcdir}"
+    destdir="${targetdir}">
+    <classpath refid="classpath.jar"/>
+  </javac>
+</target>
+	
+<target name="compileWar" depends="init, resetBuild">
+  <echo message="Compiling War..."/>
   <javac 
     debug="true"
     deprecation="false"
@@ -45,25 +76,32 @@
     source="${javac.source}"
     srcdir="${srcdir}"
     destdir="${targetdir}">
-    <classpath refid="classpath.dev"/>
+    <classpath refid="classpath.war"/>
   </javac>
 </target>
 
 
-<target name="buildWar" depends="compile">
-
+<target name="buildWar" depends="compileWar">
 	<war warfile="${warfile}" webxml="WebContent/WEB-INF/web.xml">
 		<fileset dir="WebContent"   includes="**/*" excludes="**/web.xml"/>
 		<classes dir="${targetdir}" includes="**/*.class"/>
 		<classes dir="${srcdir}"    includes="**/*.properties,**/*.xml"/>
 	</war>
-
 </target>
 	
+<target name="init">
+	<mkdir dir="${targetdir}" />
+	<mkdir dir="${distdir}" />
+</target>
 
 <target name="clean">
 	<delete dir="${targetdir}"/>
 	<delete dir="${distdir}"/>
+</target>
+
+<target name="resetBuild">
+	<delete dir="${targetdir}"/>
+	<mkdir dir="${targetdir}" />
 </target>
 
 
