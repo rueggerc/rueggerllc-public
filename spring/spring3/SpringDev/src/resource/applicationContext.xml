@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p" 
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       				    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+       				    http://www.springframework.org/schema/aop 	  http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+       				    http://www.springframework.org/schema/tx 	  http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+       				    http://www.springframework.org/schema/util    http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+
+	<!--  Enable processing of @PostConstruct annotation -->
+	<!--
+    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>
+    -->
+    
+    <!--  Enable multiple Bean Post Processors -->
+    <context:annotation-config/>
+    
+    <!--  Imports -->
+	<import resource="dev-configuration.xml"/>
+	<import resource="aop-configuration.xml"/>
+	<import resource="jdbc-configuration.xml"/>
+	<import resource="tx-configuration.xml"/>
+ 
+	<bean id="foo" class="com.rueggerllc.beans.Foo">
+		<constructor-arg value="42"></constructor-arg>
+		<property name="name" value="Jones"/>
+		<property name="administrators">
+		<list>
+			<value>Stan</value>
+			<value>Kyle</value>
+			<value>Eric</value>
+		</list>
+		</property>
+		<property name="dakota" ref="Dakota"/>
+	</bean>
+	
+	<bean id="bar" class="com.rueggerllc.beans.Bar"
+	      p:foo-ref="foo"
+	      p:chris-ref="chrisBean">
+	</bean>
+	     
+	      
+	<bean id="chrisBean" class="com.rueggerllc.beans.Chris">
+		<property name="address" value="Herndon"/>
+	</bean>
+	
+	<bean id="Dakota" class="com.rueggerllc.beans.Dakota">
+		<property name="color" value="Black"/>
+	</bean>
+	
+	<bean id="Service" class="com.rueggerllc.beans.ServiceImpl">
+	  <constructor-arg ref="required"/>
+	  <property name="optional" ref="optional"/>
+	</bean>
+	
+	<bean id="required" class="com.rueggerllc.beans.RequiredImpl">
+	</bean>
+	
+	<bean id="optional" class="com.rueggerllc.beans.OptionalImpl">
+	</bean>
+	
+	<bean id="mySingleton" class="com.rueggerllc.beans.MySingleton"
+		   factory-method="getInstance"/>
+		   
+	<bean id="clientServiceFactory" class="com.rueggerllc.beans.ClientServiceFactory"/>
+	
+	<bean id="clientService" factory-bean="clientServiceFactory" 
+		  factory-method="getNewInstance"/>
+	
+
+
+</beans>
