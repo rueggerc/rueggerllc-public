@@ -23,6 +23,9 @@ public class PetDaoTest {
 	
 	private static Logger logger = Logger.getLogger(PetDaoTest.class);
 	
+	private static String[] species = {"Canine", "Feline", "Bird"};
+	private static String[] colors = {"White", "Black", "Golden", "Orange"};
+	
 	@BeforeClass
 	public static void setupClass() throws Exception {
 	}
@@ -45,12 +48,39 @@ public class PetDaoTest {
 		logger.info("Inside Dummy Test");
 	}
 	
+	
 	@Test
 	// @Ignore
+	public void testInsertPets() throws Exception {
+		try {
+	
+			for (int i = 0; i < 100; i++) {
+				Pet pet = new Pet();
+				pet.setName("Pet" + i);
+				PetDetails petDetails = new PetDetails();
+				pet.setPetDetails(petDetails);
+				petDetails.setDescription("Pet Description" + i);
+				Date now = new Date(System.currentTimeMillis());
+				petDetails.setBirthDate(now);
+				petDetails.setSpecies(species[i%species.length]);
+				petDetails.setAge(i%10 + 1);
+				petDetails.setWeight(i%75+1);
+				petDetails.setColor(colors[i%colors.length]);
+				
+				PetDao dao = new PetDaoImpl();
+				dao.save(pet);
+				logger.info("Added Pet:"  + pet.getId());
+			}
+			
+		} catch (Exception e) {
+			logger.error("Error", e);
+		}
+	}
+	
+	@Test
+	@Ignore
 	public void testInsertPet1() throws Exception {
 		try {
-			File file = new File("D://Pics/Pets//resized//captain_448x600.jpg");
-			FileInputStream is = new FileInputStream(file);
 			Pet pet = new Pet();
 			pet.setName("Captain");
 			 
@@ -58,12 +88,6 @@ public class PetDaoTest {
 			pet.setPetDetails(petDetails);
 		
 			petDetails.setDescription("Captain The Dog");
-			byte[] dataArray = new byte[(int)file.length()];
-			int numberBytes = is.read(dataArray);
-			petDetails.setData(dataArray);
-			petDetails.setLength(dataArray.length);
-			petDetails.setMimeType("image/jpeg");
-			petDetails.setFileName("captain.jpg");
 			Date now = new Date(System.currentTimeMillis());
 			petDetails.setBirthDate(now);
 			petDetails.setSpecies("Canine");
@@ -79,72 +103,6 @@ public class PetDaoTest {
 		}
 	}
 	
-	@Test
-	// @Ignore
-	public void testInsertPet2() throws Exception {
-		try {
-			File file = new File("D://Pics/Pets//resized//darwin_450x600.jpg");
-			FileInputStream is = new FileInputStream(file);
-			Pet pet = new Pet();
-			pet.setName("Darwin");
-			 
-			PetDetails petDetails = new PetDetails();
-			pet.setPetDetails(petDetails);
-		
-			petDetails.setDescription("Darwin the Bird");
-			byte[] dataArray = new byte[(int)file.length()];
-			int numberBytes = is.read(dataArray);
-			petDetails.setData(dataArray);
-			petDetails.setFileName("darwin.jpg");
-			petDetails.setLength(dataArray.length);
-			petDetails.setMimeType("image/jpeg");
-			Date now = new Date(System.currentTimeMillis());
-			petDetails.setBirthDate(now);
-			petDetails.setSpecies("Bird");
-			petDetails.setAge(5);
-			petDetails.setWeight(0.5);
-			petDetails.setColor("Multi");
-			
-			PetDao dao = new PetDaoImpl();
-			dao.save(pet);
-			logger.info("Added Pet:"  + pet.getId());
-		} catch (Exception e) {
-			logger.error("Error", e);
-		}
-	}
-	
-	@Test
-	@Ignore
-	public void testInsertPet3() throws Exception {
-		try {
-			File file = new File("D://Pics/Pets//resized//oscar_450x600.jpg");
-			FileInputStream is = new FileInputStream(file);
-			Pet pet = new Pet();
-			pet.setName("Oscar");
-			 
-			PetDetails petDetails = new PetDetails();
-			pet.setPetDetails(petDetails);
-		
-			petDetails.setDescription("Oscar The Cat");
-			byte[] dataArray = new byte[(int)file.length()];
-			int numberBytes = is.read(dataArray);
-			petDetails.setData(dataArray);
-			petDetails.setLength(dataArray.length);
-			petDetails.setMimeType("image/jpeg");
-			Date now = new Date(System.currentTimeMillis());
-			petDetails.setBirthDate(now);
-			petDetails.setSpecies("Feline");
-			petDetails.setAge(6);
-			petDetails.setWeight(8);
-			petDetails.setColor("Grey");
-			
-			PetDao dao = new PetDaoImpl();
-			dao.save(pet);
-			logger.info("Added Pet:"  + pet.getId());
-		} catch (Exception e) {
-			logger.error("Error", e);
-		}
-	}
 	
 	
 	@Test

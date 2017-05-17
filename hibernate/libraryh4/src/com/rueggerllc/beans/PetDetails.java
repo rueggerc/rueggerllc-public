@@ -31,19 +31,7 @@ public class PetDetails {
   @GeneratedValue(generator = "gen")
   @GenericGenerator(name="gen", strategy = "foreign", parameters=@Parameter(name="property", value="pet"))
   private String pet_id;
-  
-  @Column(name="mimetype")
-  private String mimeType;
-  
-  @Lob
-  @Column(name="picture", columnDefinition="longblob")
-  private byte[] data;
-  
-  @Column(name="file_name")
-  private String fileName;
-  
-  @Column(name="length")
-  private int length;
+ 
   
   @Column(name="description")
   private String description;
@@ -69,23 +57,6 @@ public class PetDetails {
   
 
 
-
-
- 
-
-  
-
-
-  public int getLength() {
-	  return length;
-  }
-
-
-  public void setLength(int length) {
-	  this.length = length;
-  }
-
-
   public String getDescription() {
 	  return description;
   }
@@ -103,16 +74,6 @@ public class PetDetails {
 
   public void setPet_id(String pet_id) {
 	  this.pet_id = pet_id;
-  }
-
-
-  public String getMimeType() {
-	  return mimeType;
-  }
-
-
-  public void setMimeType(String mimeType) {
-	  this.mimeType = mimeType;
   }
 
 
@@ -167,16 +128,6 @@ public class PetDetails {
 
 
 
-  public byte[] getData() {
-	return data;
-  }
-
-
-	public void setData(byte[] data) {
-		this.data = data;
-	}
-
-
    public Pet getPet() {
 	  return pet;
   }
@@ -192,21 +143,5 @@ public class PetDetails {
   }
 
 
-public String getFileName() {
-	return fileName;
-}
-
-
-public void setFileName(String fileName) {
-	this.fileName = fileName;
-}
-  
-  
-
-
-
-
-  
- 
 
 }

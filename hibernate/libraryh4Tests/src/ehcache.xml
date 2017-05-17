@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-Instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="true"
+	monitoring="autodetect" dynamicConfig="true">
+	
+
+	<diskStore path="/Users/chris/ehcache"/>
+	
+	<defaultCache maxElementsInMemory="0" eternal="false"
+		overflowToDisk="true" timeToIdleSeconds="3600" timeToLiveSeconds="4000">
+	</defaultCache>
+	
+<!-- 	<cache name="com.rueggerllc.beans.Account"
+		maxElementsInMemory="50" maxElementsOnDisk="1000" eternal="false"
+		overflowToDisk="true" timeToIdleSeconds="3600" timeToLiveSeconds="4000"
+		memoryStoreEvictionPolicy="LFU" /> -->
+		
+	<cache name="com.rueggerllc.beans.Course"
+		maxElementsInMemory="100" maxElementsOnDisk="1000" eternal="false"
+		overflowToDisk="true" timeToIdleSeconds="3600" timeToLiveSeconds="4000"
+		memoryStoreEvictionPolicy="LFU" />
+		
+	<cache name="com.rueggerllc.beans.Pet"
+		maxElementsInMemory="50" maxElementsOnDisk="1000" eternal="false"
+		overflowToDisk="true" timeToIdleSeconds="3600" timeToLiveSeconds="4000"
+		memoryStoreEvictionPolicy="LFU" />
+		
+	<cache name="org.hibernate.cache.spi.UpdateTimestampsCache"
+		maxEntriesLocalHeap="5000" eternal="true">
+		<persistence strategy="localTempSwap"/>
+	</cache>
+
+
+
+</ehcache>

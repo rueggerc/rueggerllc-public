@@ -55,7 +55,7 @@ public class StudentDaoTest {
 	}
 	
 	@Test
-	// @Ignore
+	@Ignore
 	public void testGetAllStudents() throws Exception {
 	    logger.info("Get All Students");	    
 	    StudentDAO dao = new StudentDAOImpl();
@@ -73,7 +73,7 @@ public class StudentDaoTest {
 	
 
 	@Test
-	@Ignore
+	// @Ignore
 	public void testCreateStudentsAndCourses() throws Exception {
 	    logger.info("Add Students and Courses");
 
