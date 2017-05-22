@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 
 public class MongoTests {
@@ -42,6 +43,7 @@ public class MongoTests {
 	}
 	
 	@Test
+	@Ignore
 	public void writeDocument() {
 		try {
 			logger.info("Write Document Begin");
@@ -73,9 +75,36 @@ public class MongoTests {
 		} catch (Exception e) {
 			logger.error("ERROR", e);
 		}
-		
-		
-		
+	}
+	
+	@Test
+	// @Ignore
+	public void readCollection() {
+		try {
+			logger.info("Read Collection Begin");
+			
+			
+			MongoClient mongoClient = new MongoClient();
+			logger.info("Connected to Mongo");
+			
+			MongoDatabase database = mongoClient.getDatabase("rueggerllc");
+			
+			// Get a Collection
+			MongoCollection<Document> collection1 = database.getCollection("collection1");
+			
+			// Document document = collection1.find().first();
+			// logger.info("Document=\n" + document.toJson());
+			
+			MongoCursor<Document> cursor = collection1.find().iterator();
+		    while (cursor.hasNext()) {
+		        logger.info("Next Document=\n" + cursor.next().toJson());
+		    }
+		    cursor.close();
+			
+			
+		} catch (Exception e) {
+			logger.error("ERROR", e);
+		}
 	}
 
 	
