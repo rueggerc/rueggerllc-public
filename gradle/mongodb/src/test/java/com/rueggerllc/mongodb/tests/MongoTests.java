@@ -1,6 +1,10 @@
 package com.rueggerllc.mongodb.tests;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.bson.Document;
@@ -10,6 +14,14 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+
+
+import org.hamcrest.collection.IsEmptyCollection;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
+import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
@@ -41,6 +53,26 @@ public class MongoTests {
 	public void dummyTest() {
 		logger.info("Inside Dummy Test");
 	}
+	
+	
+	@Test
+	// @Ignore
+	public void testListBuiltCorrectly() {
+		try {
+			List<String> myList = new ArrayList<String>();
+			myList.add("foo");
+			myList.add("bar");
+			myList.add("Fred");
+			// assertEquals(myList.size(), 3);
+			assertThat(myList, hasSize(3));
+			System.out.println("List OK!");
+		} catch (Exception e) {
+			System.out.println("Error=" + e);
+		}
+	}
+	
+	
+	
 	
 	@Test
 	@Ignore
@@ -78,7 +110,7 @@ public class MongoTests {
 	}
 	
 	@Test
-	// @Ignore
+	@Ignore
 	public void readCollection() {
 		try {
 			logger.info("Read Collection Begin");
