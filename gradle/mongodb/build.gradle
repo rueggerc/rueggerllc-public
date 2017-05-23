@@ -19,5 +19,13 @@ task showCache << {
   configurations.compile.each { println it }
 }
 
+test {
+
+	// We want display the following test events
+    testLogging {
+        events "PASSED", "STARTED", "FAILED", "SKIPPED"
+    }
+}
+
 
 
