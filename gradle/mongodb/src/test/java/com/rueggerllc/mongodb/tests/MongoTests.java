@@ -67,7 +67,7 @@ public class MongoTests {
 			assertThat(myList, hasSize(3));
 			System.out.println("List OK!");
 		} catch (Exception e) {
-			System.out.println("Error=" + e);
+			System.out.println("List Not Proper Size=" + e);
 		}
 	}
 	

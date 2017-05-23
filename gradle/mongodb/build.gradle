@@ -26,6 +26,3 @@ test {
         events "PASSED", "STARTED", "FAILED", "SKIPPED"
     }
 }
-
-
-
