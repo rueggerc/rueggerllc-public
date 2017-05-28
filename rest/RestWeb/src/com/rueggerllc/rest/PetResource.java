@@ -1,6 +1,3 @@
-
-
-
 package com.rueggerllc.rest;
 
 import java.util.List;
@@ -20,7 +17,7 @@ import com.rueggerllc.beans.PetDetails;
 import com.rueggerllc.beans.PetTransferObject;
 import com.rueggerllc.beans.PetsTransferObject;
 import com.rueggerllc.delegates.PetDelegate;
-import com.rueggerllc.util.PetLinkBuilder;
+
 
 @Path("/pets")
 public class PetResource {
@@ -46,8 +43,8 @@ public class PetResource {
 				pets.add(petTransferObject);
 			}
 			
-			PetLinkBuilder linkBuilder = new PetLinkBuilder();
-			linkBuilder.buildLinks(pets, uriInfo);
+			// PetLinkBuilder linkBuilder = new PetLinkBuilder();
+			// linkBuilder.buildLinks(pets, uriInfo);
 			
 			
 		} catch (Exception e) {

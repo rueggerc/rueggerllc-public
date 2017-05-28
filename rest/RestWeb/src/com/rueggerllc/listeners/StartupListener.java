@@ -2,10 +2,8 @@ package com.rueggerllc.listeners;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-
 import org.apache.log4j.Logger;
 
-import net.sf.ehcache.CacheManager;
 
 public class StartupListener implements ServletContextListener {
 	
@@ -17,7 +15,7 @@ public class StartupListener implements ServletContextListener {
 	
 	public void contextDestroyed(ServletContextEvent event) {
 		logger.info(String.format("==== %s Context Destruction BEGIN ===", APP_NAME));
-		CacheManager.getInstance().shutdown();
+		// CacheManager.getInstance().shutdown();
 		logger.info(String.format("==== %s Context Destruction END ===", APP_NAME));
 	}
 	

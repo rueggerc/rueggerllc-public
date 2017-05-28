@@ -26,11 +26,11 @@ import com.sun.jersey.spi.resource.Singleton;
 public class BookResource {
 	
 	private static Logger logger = Logger.getLogger(BookResource.class);
+	private BookDelegate bookDelegate = new BookDelegate();
 	private Books books = null;
 	
 	public BookResource() {
 		logger.info("===== Creating BookResource ======");
-		getOrCreateBooks();
 	}
 
 	
@@ -39,8 +39,7 @@ public class BookResource {
 	@Produces({MediaType.APPLICATION_XML,  MediaType.APPLICATION_JSON})
 	public Books getBooks(@Context UriInfo uriInfo, @Context HttpHeaders headers) {
 		logger.info("--Retrieving Books---");
-		Books books = getOrCreateBooks();
-		return books;
+		return bookDelegate.getBooks();
 	}
 	
 	@GET
@@ -49,8 +48,10 @@ public class BookResource {
 	public Book getBook(@PathParam("bookId") String bookId, @Context UriInfo uriInfo, @Context HttpHeaders headers) {
 		logger.info("======== Retrieving Book " + bookId + " ==============");
 		Book book = fetchBook(bookId);
-		BookLinkBuilder linkBuilder = new BookLinkBuilder();
-		linkBuilder.buildLinks(book, uriInfo);
+		if (book != null) {
+			BookLinkBuilder linkBuilder = new BookLinkBuilder();
+			linkBuilder.buildLinks(book, uriInfo);
+		}
 		return book;
 	}
 	
@@ -59,8 +60,9 @@ public class BookResource {
 	@Path("/book")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Book createBook(Book bookInput, @Context UriInfo uriInfo, @Context HttpHeaders headers) {
-		logger.info("Create Book From=\n" +bookInput);
-		return createBook(bookInput);
+		logger.info("Create Book BEGIN");
+		logger.info("Input Book=\n" +bookInput);
+		return bookDelegate.createBook(bookInput);
 	}
 	
 	
@@ -92,40 +94,10 @@ public class BookResource {
 		books.remove(book);
 	}
 	
-	
-	
-	
-	private Book createBook(Book bookInput) {
-		Book newBook = new Book();
-		newBook.setTitle(bookInput.getTitle());
-		newBook.setNumberOfPages(bookInput.getNumberOfPages());
-		newBook.setPublicationDate(bookInput.getPublicationDate());
-		books.add(newBook);
-		return newBook;
+	private Book fetchBook(String bookId) {
+		return bookDelegate.fetchBook(bookId);
 	}
-	
-	
-	
-	
-	private Book fetchBook(String bookID) {
-		for (Book book : books) {
-			if (book.getId().equals(bookID)) {
-				return book;
-			}
-		}
-		return null;
-	}
-	
-	
 
-	
-	private  Books getOrCreateBooks() {
-		if (books == null) {
-			BookDelegate bookDelegate = new BookDelegate();
-			books = bookDelegate.getBooks();
-		}
-		return books;
-	}
 	
 	
 }

@@ -3,6 +3,7 @@
 	<name>RestWeb</name>
 	<comment></comment>
 	<projects>
+		<project>RestLib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

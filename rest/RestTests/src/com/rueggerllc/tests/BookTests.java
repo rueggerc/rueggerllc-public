@@ -56,18 +56,26 @@ public class BookTests {
 	
 	@Test
 	// @Ignore
-	public void getPlatform() {
-		Properties properties = System.getProperties();
-		for (Enumeration e = properties.keys(); e.hasMoreElements();) {
-			Object key = e.nextElement();
-			Object value = properties.get(key);
-			logger.info(key + "=" + value);
-		}
+	public void testCreateBook() {
+		logger.info("Create Book Begin");
+		ClientConfig config = new DefaultClientConfig();
+		Client client = Client.create(config);
+		URI postURI = getBookTargetURI("book");
+		Book newBook = new Book();
+		newBook.setTitle("Ruegger Book");
+		newBook.setNumberOfPages(5635);
+		newBook.setPublicationDate(getNow());
+		Book createdBook = client.resource(postURI).post(Book.class, newBook);
+		logger.info("Created Book=\n" + createdBook);
 		
-		String osName = properties.getProperty("os.name");
-		logger.info("Operationg System=" + osName);
+		URI getURI = getBookTargetURI("books");
+		Books books = client.resource(getURI).get(Books.class);
 		
+		logger.info("Number Of Books=" + books.size());
 	}
+	
+	
+
 	
 	@Test
 	@Ignore
@@ -80,6 +88,7 @@ public class BookTests {
 		for (Book book : books) {
 			logger.info("Next Book\n" + book);
 		}
+		logger.info(books.size() + " Books Read");
 		logger.info("Get Books END");
 		
 	}
@@ -118,21 +127,7 @@ public class BookTests {
 	}
 	
 	
-	@Test
-	@Ignore
-	public void testCreateBook() {
-		logger.info("Create Book Begin");
-		ClientConfig config = new DefaultClientConfig();
-		Client client = Client.create(config);
-		URI postURI = getBookTargetURI("book");
-		
-		Book newBook = new Book();
-		newBook.setTitle("Ruegger Book");
-		newBook.setNumberOfPages(5635);
-		newBook.setPublicationDate(getNow());
-		Book createdBook = client.resource(postURI).post(Book.class, newBook);
-		logger.info("Created Book=\n" + createdBook);
-	}
+
 	
 	
 	@Test
@@ -166,6 +161,20 @@ public class BookTests {
 		return data;
 	}
 	
+	@Test
+	@Ignore
+	public void getPlatform() {
+		Properties properties = System.getProperties();
+		for (Enumeration e = properties.keys(); e.hasMoreElements();) {
+			Object key = e.nextElement();
+			Object value = properties.get(key);
+			logger.info(key + "=" + value);
+		}
+		
+		String osName = properties.getProperty("os.name");
+		logger.info("Operationg System=" + osName);
+		
+	}
 	
 	
 	private URI getBookTargetURI(String path) {

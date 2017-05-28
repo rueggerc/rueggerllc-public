@@ -2,6 +2,9 @@
     <wb-module deploy-name="RestWeb">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="RestLib.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/RestLib/RestLib">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="RestWeb"/>
         <property name="java-output-path" value="/RestWeb/build/classes"/>
     </wb-module>

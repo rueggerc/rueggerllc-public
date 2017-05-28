@@ -11,11 +11,34 @@ import com.rueggerllc.beans.Books;
 public class BookDelegate {
 	
 	private static final Logger logger = Logger.getLogger(BookDelegate.class);
+	private Books books;
 	
-	public Books getBooks() {
-		return createBooks();
+	public BookDelegate() {
+		createBooks();
 	}
 	
+	public Books getBooks() {
+		return books;
+	}
+	
+	public Book createBook(Book bookInput) {
+		Book newBook = new Book();
+		newBook.setId(""+ books.size());
+		newBook.setTitle(bookInput.getTitle());
+		newBook.setNumberOfPages(bookInput.getNumberOfPages());
+		newBook.setPublicationDate(bookInput.getPublicationDate());
+		books.add(newBook);
+		return newBook;
+	}
+	
+	public Book fetchBook(String bookId) {
+		for (Book book : books) {
+			if (book.getId().equals(bookId)) {
+				return book;
+			}
+		}
+		return null;
+	}
 	
 	private  Books createBooks() {
 		String titles[] = 
@@ -38,8 +61,7 @@ public class BookDelegate {
 			 "The truth about money",
 			 "Foo and the Bars"
 			};
-		Books books = new Books();
-		logger.info("TITLES=" + titles);
+		books = new Books();
 		for (int i = 0; i < titles.length; i++) {
 			Book book = new Book();
 			book.setId(""+i);
