@@ -1,12 +1,14 @@
 package com.rueggerllc.mock;
 
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
 
 import com.rueggerllc.beans.Book;
 import com.rueggerllc.beans.Books;
+import com.rueggerllc.util.BookComparator;
 
 public class BookDelegate {
 	
@@ -18,6 +20,7 @@ public class BookDelegate {
 	}
 	
 	public Books getBooks() {
+		Collections.sort(books, new BookComparator());
 		return books;
 	}
 	
