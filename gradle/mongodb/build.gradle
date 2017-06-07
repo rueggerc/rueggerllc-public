@@ -10,6 +10,7 @@ repositories {
 dependencies {
     compile 'log4j:log4j:1.2.17'
     compile 'org.mongodb:mongodb-driver:3.4.2'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.0.2'
     testCompile 'junit:junit:4.12'
     testCompile 'org.hamcrest:hamcrest-library:1.3'
 }
