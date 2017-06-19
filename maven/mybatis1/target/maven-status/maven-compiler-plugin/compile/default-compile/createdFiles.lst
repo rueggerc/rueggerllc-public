@@ -1,8 +1,0 @@
-com/rueggerllc/mappers/Mapper.class
-com/rueggerllc/dao/BankAccountDao.class
-com/rueggerllc/dao/BaseDaoImpl.class
-com/rueggerllc/domain/BankAccount.class
-com/rueggerllc/mappers/BankAccountMapper.class
-com/rueggerllc/dao/BankAccountDaoImpl.class
-com/rueggerllc/dao/BaseDao.class
-com/rueggerllc/mybatis/MybatisContext.class
