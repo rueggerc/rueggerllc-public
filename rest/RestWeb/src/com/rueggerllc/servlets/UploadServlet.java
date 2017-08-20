@@ -34,12 +34,14 @@ public class UploadServlet extends javax.servlet.http.HttpServlet {
 		try {
 			
 			logger.info("Upload File BEGIN");
-		    String description = request.getParameter("description"); 
+		    String description = request.getParameter("description");
+		    logger.info("Description=" + description);
 		    Part filePart = request.getPart("file"); 
 		    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
 		    long fileSize = filePart.getSize();
 		    String contentType = filePart.getContentType();
 		
+		    // String fileName = "android.jpg";
 		    logger.info("File Name=" + fileName);
 		    logger.info("contentType=" + contentType);
 		    logger.info("File size =" + fileSize);

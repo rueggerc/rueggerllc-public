@@ -1,5 +1,9 @@
 package com.rueggerllc.rest;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -40,6 +44,21 @@ public class BookResource {
 	public Books getBooks(@Context UriInfo uriInfo, @Context HttpHeaders headers) {
 		logger.info("--Retrieving Books---");
 		return bookDelegate.getBooks();
+	}
+	
+	@GET
+	@Path("booklist")
+	@Produces({MediaType.APPLICATION_XML,  MediaType.APPLICATION_JSON})
+	public List<Book> getBookList(@Context UriInfo uriInfo, @Context HttpHeaders headers) {
+		logger.info("--Retrieving Book List---");
+		Book book = new Book();
+		book.setTitle("Churchhill!");
+		book.setNumberOfPages(333);
+		book.setPublicationDate(Calendar.getInstance().getTime());
+		List<Book> bookList = new ArrayList<Book>();
+		bookList.add(book);
+		return bookList;
+		// return bookDelegate.getBooks();
 	}
 	
 	@GET
