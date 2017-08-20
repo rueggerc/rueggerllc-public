@@ -5,6 +5,7 @@
 <title>React App</title>
 <script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
 <script src="http://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
 </head>
 <body>
 
@@ -14,11 +15,27 @@
 <div id="react-container"></div>
 
 <script>
-console.log("Script Section!");
+console.log("Script Section BEGIN");
 ReactDOM.render(
 	React.DOM.h1(null, "Hello world!"),
 	document.getElementById("react-container")
 );
+
+// type, properties, children
+var foo = React.createElement("h1", {id: "recipe-1", 'data-type': "title"}, "Baked Salmon Recipe");
+ReactDOM.render(foo, document.getElementById("react-container"));
+
+/* ReactDOM.render(
+  <div>
+  <h1>Batman</h1>
+  <h1>Iron Man</h1>
+  <h2>Superman</h1>
+  </div>,
+  document.getElementById("react-container")
+) */;
+
+
+console.log("Script Section END");
 </script>
 
 
