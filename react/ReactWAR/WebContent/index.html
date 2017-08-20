@@ -33,13 +33,13 @@
 			var letterStyle = {
  				padding: 10,
 				margin: 10,
-				backgroundColor: "#ffde00",
+				backgroundColor: this.props.bgcolor,
 				color: "#333",
 				display: "inline-block",
 				fontFamily: "monospace",
 				fontSize: "32",
 				textAlign: "center"
-        	};
+			};
 
 			return(
 				<div style={letterStyle}>
@@ -55,9 +55,10 @@
 		<HelloWorld target="Captain">Child1</HelloWorld>
 		<HelloWorld target="Oscar">Foobar</HelloWorld>
 		<HelloWorld target="Da Birds">LaterMuch</HelloWorld>
-		<Letter>A</Letter>
-		<Letter>B</Letter>
-		<Letter>C</Letter>
+		<Letter bgcolor="#58B3FF">A</Letter>
+		<Letter bgcolor="red">B</Letter>
+		<Letter bgcolor="green">C</Letter>
+		<Letter bgcolor="yellow">D</Letter>
 		<h1>Batman</h1>
 		<h1>Iron Man</h1>
 		<h1>Superman</h1>
