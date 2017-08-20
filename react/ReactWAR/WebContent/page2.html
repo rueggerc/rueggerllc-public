@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>React App</title>
+<script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+<script src="http://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+<body>
+
+
+<H1>Welcome to my REACT APP</H1>
+
+<div id="react-container"></div>
+
+<script>
+console.log("Script Section BEGIN");
+ReactDOM.render(
+	React.DOM.h1(null, "Hello world!"),
+	document.getElementById("react-container")
+);
+
+// type, properties, children
+// var foo = React.createElement("h1", {id: "recipe-1", 'data-type': "title"}, "Baked Salmon Recipe");
+// ReactDOM.render(foo, document.body);
+
+
+console.log("Script Section END");
+</script>
+
+
+
+</body>
+</html>
