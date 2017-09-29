@@ -1,0 +1,8 @@
+extends layout
+
+block content
+	h1=title
+	form#formAddPet(name="addpet",method="post",action="/addpet")
+		input#inputPetName(type="text", placeholder="name", name="petname")
+		input#inputPetType(type="text", placeholder="type", name="pettype")
+		button#btnSubmit(type="submit") submit	

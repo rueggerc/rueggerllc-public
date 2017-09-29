@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    h1.
+        Pet List
+    ul
+        each pet, i in petlist
+            li
+                Next Pet= #{pet.name} Species=#{pet.type}
+    

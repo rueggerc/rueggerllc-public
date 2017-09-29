@@ -1,6 +1,7 @@
 package com.rueggerllc.mongodb.tests;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,15 +16,8 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
-
-import org.hamcrest.collection.IsEmptyCollection;
-import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
-import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
-import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
-import static org.hamcrest.MatcherAssert.assertThat;
-
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
@@ -56,7 +50,7 @@ public class MongoTests {
 	
 	
 	@Test
-	// @Ignore
+	@Ignore
 	public void testListBuiltCorrectly() {
 		try {
 			List<String> myList = new ArrayList<String>();
@@ -110,15 +104,16 @@ public class MongoTests {
 	}
 	
 	@Test
-	@Ignore
+	// @Ignore
 	public void readCollection() {
 		try {
 			logger.info("Read Collection Begin");
 			
-			
-			MongoClient mongoClient = new MongoClient();
+			MongoClientURI connectionString = new MongoClientURI("mongodb://localhost:27017");
+			MongoClient mongoClient = new MongoClient(connectionString);
 			logger.info("Connected to Mongo");
 			
+			// MongoClient mongoClient = new MongoClient();
 			MongoDatabase database = mongoClient.getDatabase("rueggerllc");
 			
 			// Get a Collection
@@ -129,7 +124,9 @@ public class MongoTests {
 			
 			MongoCursor<Document> cursor = collection1.find().iterator();
 		    while (cursor.hasNext()) {
-		        logger.info("Next Document=\n" + cursor.next().toJson());
+		    	String data = cursor.next().toJson();
+		    	parseData(data);
+		        logger.info("Next Document=\n" + data);
 		    }
 		    cursor.close();
 			
@@ -137,6 +134,10 @@ public class MongoTests {
 		} catch (Exception e) {
 			logger.error("ERROR", e);
 		}
+	}
+	
+	private void parseData(String data) {
+		logger.info("Parsing Data=" + data);
 	}
 
 	
