@@ -1,0 +1,13 @@
+
+#Common
+build
+
+######################
+# Java
+*.class
+bin/
+target/
+
+# Package Files #
+*.war
+*.ear
